@@ -29,6 +29,7 @@ func checkSensors(sNumber int, sDataColl *SensorDataCollection) {
 }
 
 // requestValue asks for value from sensor via HTTP
+// I think it's better to use it with HTTP Timeouts on <30 secs or so
 func requestValue(i int, sDataColl *SensorDataCollection) {
 	go func() {
 		sDataColl.Wg.Add(1)
