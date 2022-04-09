@@ -16,6 +16,7 @@ type Item struct {
 	IsCorrupted *bool    `json:"isCorrupted"`
 }
 
+// checkSensors continuously repeating the "erase-read-wait" cycle
 func checkSensors(sNumber int, sDataColl *SensorDataCollection) {
 	for {
 		sDataColl.ResetFlags()
@@ -27,6 +28,7 @@ func checkSensors(sNumber int, sDataColl *SensorDataCollection) {
 	}
 }
 
+// requestValue asks for value from sensor via HTTP
 func requestValue(i int, sDataColl *SensorDataCollection) {
 	go func() {
 		sDataColl.Wg.Add(1)
@@ -52,14 +54,21 @@ func requestValue(i int, sDataColl *SensorDataCollection) {
 	}()
 }
 
+// main is main
+// maybe it all would be working better with working pool or smth
 func main() {
-	sNumber := flag.Int("s", 4, "number of sensors to check")
+	sFlag := flag.Int("s", 4, "number of sensors to check")
 	flag.Parse()
+	sNumber := *sFlag
+	if sNumber < 2 || sNumber > 10 {
+		log.Println("Unexpected amount of sensors. Setting to default: 4")
+		sNumber = 4
+	}
 
 	sDataColl := SensorDataCollection{}
-	sDataColl.InitCollection(*sNumber)
+	sDataColl.InitCollection(sNumber)
 
-	go checkSensors(*sNumber, &sDataColl)
+	go checkSensors(sNumber, &sDataColl)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != "GET" {

@@ -5,4 +5,4 @@ run_sensors: build_sensor_image
 	docker-compose up -d
 
 run_server:
-	go run ./cmd/avrhub/*.go -s 4
+	go run ./cmd/avrhub/*.go
