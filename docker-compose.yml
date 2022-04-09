@@ -21,3 +21,33 @@ services:
     container_name: sensor4
     ports:
       - "8084:8080"
+  sensor5:
+    image: youla_dev_internship_task_go_sensor:latest
+    container_name: sensor5
+    ports:
+      - "8085:8080"
+  sensor6:
+    image: youla_dev_internship_task_go_sensor:latest
+    container_name: sensor6
+    ports:
+      - "8086:8080"
+  sensor7:
+    image: youla_dev_internship_task_go_sensor:latest
+    container_name: sensor7
+    ports:
+      - "8087:8080"
+  sensor8:
+    image: youla_dev_internship_task_go_sensor:latest
+    container_name: sensor8
+    ports:
+      - "8088:8080"
+  sensor9:
+    image: youla_dev_internship_task_go_sensor:latest
+    container_name: sensor9
+    ports:
+      - "8089:8080"
+  sensor10:
+    image: youla_dev_internship_task_go_sensor:latest
+    container_name: sensor10
+    ports:
+      - "8090:8080"
